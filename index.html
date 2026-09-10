@@ -6,7 +6,6 @@
   <title>Itinerario Kitsakis Tours</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: #0d1117;
@@ -17,8 +16,6 @@
       min-height: 100vh;
       padding: 15px;
     }
-
-    /* Selector de Días Horizontal */
     .day-selector {
       display: flex;
       gap: 8px;
@@ -27,10 +24,9 @@
       overflow-x: auto;
       padding-bottom: 12px;
       margin-bottom: 12px;
-      scrollbar-width: none; /* Oculta scrollbar en Firefox */
+      scrollbar-width: none;
     }
-    .day-selector::-webkit-scrollbar { display: none; } /* Oculta scrollbar en Chrome/Safari */
-
+    .day-selector::-webkit-scrollbar { display: none; }
     .day-btn {
       background: #161b22;
       border: 1px solid #30363d;
@@ -41,17 +37,13 @@
       font-weight: 700;
       white-space: nowrap;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
-
     .day-btn.active {
       background: #00a8ff;
       color: #ffffff;
       border-color: #00a8ff;
       box-shadow: 0 0 10px rgba(0, 168, 255, 0.4);
     }
-
-    /* Contenedor Flyer estilo Story */
     .flyer-card {
       width: 100%;
       max-width: 420px;
@@ -63,8 +55,6 @@
       display: flex;
       flex-direction: column;
     }
-
-    /* Header de Marca */
     .brand-header {
       display: flex;
       justify-content: space-between;
@@ -73,93 +63,37 @@
       padding-bottom: 16px;
       margin-bottom: 20px;
     }
-
-    .brand-logo {
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-    }
-
-    .agency-tag {
-      font-size: 0.75rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #00a8ff;
-      font-weight: 700;
-    }
-
-    /* Contenido dinámico del día */
+    .brand-logo { font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; }
+    .agency-tag { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: #00a8ff; font-weight: 700; }
     .day-content { display: none; }
     .day-content.active { display: block; }
-
     .day-header { margin-bottom: 24px; }
     .day-title { font-size: 2rem; font-weight: 800; line-height: 1.1; text-transform: uppercase; }
     .day-subtitle { font-size: 0.9rem; color: #00a8ff; font-weight: 600; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      margin-left: 8px;
-      padding-left: 20px;
-      border-left: 2px solid #30363d;
-    }
-
+    .timeline { position: relative; margin-left: 8px; padding-left: 20px; border-left: 2px solid #30363d; }
     .event { position: relative; margin-bottom: 20px; }
     .event:last-child { margin-bottom: 0; }
-
-    .event-dot {
-      position: absolute;
-      left: -27px;
-      top: 4px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: #00a8ff;
-      border: 3px solid #161b22;
-    }
-
-    .time-badge {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      background: #21262d;
-      color: #8b949e;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-bottom: 4px;
-    }
-
+    .event-dot { position: absolute; left: -27px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background-color: #00a8ff; border: 3px solid #161b22; }
+    .time-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; background: #21262d; color: #8b949e; padding: 2px 6px; border-radius: 4px; margin-bottom: 4px; }
     .event-title { font-size: 0.95rem; font-weight: 700; color: #f0f6fc; }
     .event-desc { font-size: 0.82rem; color: #8b949e; line-height: 1.3; margin-top: 2px; }
-
-    /* Footer */
-    .card-footer {
-      margin-top: 24px;
-      padding-top: 16px;
-      border-top: 1px solid #30363d;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      color: #8b949e;
-    }
+    .card-footer { margin-top: 24px; padding-top: 16px; border-top: 1px solid #30363d; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #8b949e; }
     .hotel-badge { color: #ffffff; font-weight: 600; }
   </style>
 </head>
 <body>
 
-  <!-- Selector de Días (Navegación horizontal) -->
   <div class="day-selector">
-    <button class="day-btn active" onclick="switchDay(1)">Día 1</button>
-    <button class="day-btn" onclick="switchDay(2)">Día 2</button>
-    <button class="day-btn" onclick="switchDay(3)">Día 3</button>
-    <button class="day-btn" onclick="switchDay(4)">Día 4</button>
-    <button class="day-btn" onclick="switchDay(5)">Día 5</button>
-    <button class="day-btn" onclick="switchDay(6)">Día 6</button>
-    <button class="day-btn" onclick="switchDay(7)">Día 7</button>
-    <button class="day-btn" onclick="switchDay(8)">Día 8</button>
-    <button class="day-btn" onclick="switchDay(9)">Día 9</button>
-    <button class="day-btn" onclick="switchDay(10)">Día 10</button>
+    <button class="day-btn active" onclick="switchDay(1, event)">Día 1</button>
+    <button class="day-btn" onclick="switchDay(2, event)">Día 2</button>
+    <button class="day-btn" onclick="switchDay(3, event)">Día 3</button>
+    <button class="day-btn" onclick="switchDay(4, event)">Día 4</button>
+    <button class="day-btn" onclick="switchDay(5, event)">Día 5</button>
+    <button class="day-btn" onclick="switchDay(6, event)">Día 6</button>
+    <button class="day-btn" onclick="switchDay(7, event)">Día 7</button>
+    <button class="day-btn" onclick="switchDay(8, event)">Día 8</button>
+    <button class="day-btn" onclick="switchDay(9, event)">Día 9</button>
+    <button class="day-btn" onclick="switchDay(10, event)">Día 10</button>
   </div>
 
   <div class="flyer-card">
@@ -305,18 +239,13 @@
 
   </div>
 
-  <!-- JS para cambiar de día -->
   <script>
-    function switchDay(dayNumber) {
-      // Oculta todos los días
+    function switchDay(dayNumber, evt) {
       document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
-      // Desmarca todos los botones
       document.querySelectorAll('.day-btn').forEach(el => el.classList.remove('active'));
 
-      // Muestra el día seleccionado
       document.getElementById(`day-${dayNumber}`).classList.add('active');
-      // Marca el botón seleccionado
-      event.target.classList.add('active');
+      evt.target.classList.add('active');
     }
   </script>
 </body>

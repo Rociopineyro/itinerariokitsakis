@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itinerario Kitsakis Tours</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0d1117;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    /* Selector de Días Horizontal */
+    .day-selector {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      max-width: 420px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      scrollbar-width: none; /* Oculta scrollbar en Firefox */
+    }
+    .day-selector::-webkit-scrollbar { display: none; } /* Oculta scrollbar en Chrome/Safari */
+
+    .day-btn {
+      background: #161b22;
+      border: 1px solid #30363d;
+      color: #8b949e;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .day-btn.active {
+      background: #00a8ff;
+      color: #ffffff;
+      border-color: #00a8ff;
+      box-shadow: 0 0 10px rgba(0, 168, 255, 0.4);
+    }
+
+    /* Contenedor Flyer estilo Story */
+    .flyer-card {
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+      border: 1px solid #30363d;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header de Marca */
+    .brand-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #30363d;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand-logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .agency-tag {
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #00a8ff;
+      font-weight: 700;
+    }
+
+    /* Contenido dinámico del día */
+    .day-content { display: none; }
+    .day-content.active { display: block; }
+
+    .day-header { margin-bottom: 24px; }
+    .day-title { font-size: 2rem; font-weight: 800; line-height: 1.1; text-transform: uppercase; }
+    .day-subtitle { font-size: 0.9rem; color: #00a8ff; font-weight: 600; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      margin-left: 8px;
+      padding-left: 20px;
+      border-left: 2px solid #30363d;
+    }
+
+    .event { position: relative; margin-bottom: 20px; }
+    .event:last-child { margin-bottom: 0; }
+
+    .event-dot {
+      position: absolute;
+      left: -27px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #00a8ff;
+      border: 3px solid #161b22;
+    }
+
+    .time-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: #21262d;
+      color: #8b949e;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+
+    .event-title { font-size: 0.95rem; font-weight: 700; color: #f0f6fc; }
+    .event-desc { font-size: 0.82rem; color: #8b949e; line-height: 1.3; margin-top: 2px; }
+
+    /* Footer */
+    .card-footer {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid #30363d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #8b949e;
+    }
+    .hotel-badge { color: #ffffff; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!-- Selector de Días (Navegación horizontal) -->
+  <div class="day-selector">
+    <button class="day-btn active" onclick="switchDay(1)">Día 1</button>
+    <button class="day-btn" onclick="switchDay(2)">Día 2</button>
+    <button class="day-btn" onclick="switchDay(3)">Día 3</button>
+    <button class="day-btn" onclick="switchDay(4)">Día 4</button>
+    <button class="day-btn" onclick="switchDay(5)">Día 5</button>
+    <button class="day-btn" onclick="switchDay(6)">Día 6</button>
+    <button class="day-btn" onclick="switchDay(7)">Día 7</button>
+    <button class="day-btn" onclick="switchDay(8)">Día 8</button>
+    <button class="day-btn" onclick="switchDay(9)">Día 9</button>
+    <button class="day-btn" onclick="switchDay(10)">Día 10</button>
+  </div>
+
+  <div class="flyer-card">
+    <div class="brand-header">
+      <span class="brand-logo">KITSAKIS <span style="color:#00a8ff">TOURS</span></span>
+      <span class="agency-tag">Vivaterra DMC</span>
+    </div>
+
+    <!-- DÍA 1 -->
+    <div id="day-1" class="day-content active">
+      <div class="day-header">
+        <div class="day-title">DÍA 1</div>
+        <div class="day-subtitle">09 NOV 2026 • RÍO DE JANEIRO</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">06:00 AM</span><div class="event-title">Llegada a Río</div><div class="event-desc">Vuelo internacional. Traslado privado GIG / Hotel con guía.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">OPCIONAL</span><div class="event-title">Paseo Bahía de Guanabara</div><div class="event-desc">Barco privado 2 horas con Open Bar y canapés.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">NOCHE</span><div class="event-title">Cena de Bienvenida</div><div class="event-desc">Menú VIP Churrasco en Restaurante Rubaiyat.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Hilton Copacabana</span></div>
+    </div>
+
+    <!-- DÍA 2 -->
+    <div id="day-2" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 2</div>
+        <div class="day-subtitle">10 NOV 2026 • RÍO DE JANEIRO</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">MAÑANA</span><div class="event-title">Tour Pan de Azúcar</div><div class="event-desc">Visita guiada (6 hs) con Ticket Fast Track incluido.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">EXCLUSIVO</span><div class="event-title">Show Capoeira WOW</div><div class="event-desc">Presentación privada de música y danza Capoeira.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">NOCHE</span><div class="event-title">Cena en Ipanema</div><div class="event-desc">Cena frente al mar en Classico Beach Club Ipanema.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Hilton Copacabana</span></div>
+    </div>
+
+    <!-- DÍA 3 -->
+    <div id="day-3" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 3</div>
+        <div class="day-subtitle">11 NOV 2026 • RÍO DE JANEIRO</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">MAÑANA</span><div class="event-title">Corcovado & Favela Jeep Tour</div><div class="event-desc">Cristo Redentor en tren, Santa Teresa y Favela en Jeep (5 hs).</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">TARDE</span><div class="event-title">Almuerzo / Tiempo Libre</div><div class="event-desc">Tiempo libre para recorrer la ciudad o disfrutar la playa.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">NOCHE</span><div class="event-title">Cena Buffet</div><div class="event-desc">Cena tradicional en Churrascaria Palace.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Hilton Copacabana</span></div>
+    </div>
+
+    <!-- DÍA 4 -->
+    <div id="day-4" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 4</div>
+        <div class="day-subtitle">12 NOV 2026 • RÍO DE JANEIRO</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">MAÑANA</span><div class="event-title">Maracaná & Carnival Experience</div><div class="event-desc">Tour en Estadio Maracaná y taller de Samba/Percusión en Grande Rio.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">20:00 PM</span><div class="event-title">Cena de Despedida Río</div><div class="event-desc">Cocktail y Churrasco en Fogo do Chão con trío de Samba en vivo.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Hilton Copacabana</span></div>
+    </div>
+
+    <!-- DÍA 5 -->
+    <div id="day-5" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 5</div>
+        <div class="day-subtitle">13 NOV 2026 • RÍO / CATARATAS IGUAZÚ</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">08:50 AM</span><div class="event-title">Vuelo a Iguazú</div><div class="event-desc">Traslado al aeropuerto y vuelo GIG-IGU (G3 1860).</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">TARDE</span><div class="event-title">Cataratas Lado Brasileño</div><div class="event-desc">Visita al Parque Nacional do Iguaçu. Cruce de frontera a Argentina.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">NOCHE</span><div class="event-title">Cena de Gala Hotel</div><div class="event-desc">Cena de 3 pasos en Restaurante Gran Meliá Iguazú.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Gran Meliá Iguazú 5*</span></div>
+    </div>
+
+    <!-- DÍA 6 -->
+    <div id="day-6" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 6</div>
+        <div class="day-subtitle">14 NOV 2026 • IGUAZÚ / BUENOS AIRES</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">MAÑANA</span><div class="event-title">Cataratas Lado Argentino</div><div class="event-desc">Garganta del Diablo, Tren Ecológico y aventura en bote Gran Aventura.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">16:48 PM</span><div class="event-title">Vuelo a Buenos Aires</div><div class="event-desc">Vuelo IGR-EZE (JA3147) y traslado al hotel.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">NOCHE</span><div class="event-title">Cena en Piegari</div><div class="event-desc">Cena de bienvenida en Buenos Aires a pasos del hotel.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Casa Lucía 5*</span></div>
+    </div>
+
+    <!-- DÍA 7 -->
+    <div id="day-7" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 7</div>
+        <div class="day-subtitle">15 NOV 2026 • BUENOS AIRES</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">MAÑANA</span><div class="event-title">City Tour Zona Sur</div><div class="event-desc">Recorrido por la ciudad (6 hs) + WOW Factor Evita Performance.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">NOCHE</span><div class="event-title">Cena & Tango Show</div><div class="event-desc">Show de Tango tradicional y cena en La Ventana.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Casa Lucía 5*</span></div>
+    </div>
+
+    <!-- DÍA 8 -->
+    <div id="day-8" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 8</div>
+        <div class="day-subtitle">16 NOV 2026 • BUENOS AIRES / TIGRE</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">MAÑANA</span><div class="event-title">Excursión a Tigre</div><div class="event-desc">Navegación en el Delta hacia la Isla El Descanso.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">ALMUERZO</span><div class="event-title">Almuerzo Gourmet en la Isla</div><div class="event-desc">Menú completo con vinos en Isla El Descanso. Noche libre.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Casa Lucía 5*</span></div>
+    </div>
+
+    <!-- DÍA 9 -->
+    <div id="day-9" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 9</div>
+        <div class="day-subtitle">17 NOV 2026 • BUENOS AIRES</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">MAÑANA</span><div class="event-title">City Tour Zona Norte</div><div class="event-desc">Visita a Recoleta y Cementerio de la Recoleta.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">NOCHE</span><div class="event-title">Cena de Despedida</div><div class="event-desc">Cena Vasca Gourmet en Restaurante Berria by Sagardi.</div></div>
+      </div>
+      <div class="card-footer"><span>Alojamiento:</span><span class="hotel-badge">Casa Lucía 5*</span></div>
+    </div>
+
+    <!-- DÍA 10 -->
+    <div id="day-10" class="day-content">
+      <div class="day-header">
+        <div class="day-title">DÍA 10</div>
+        <div class="day-subtitle">18 NOV 2026 • BUENOS AIRES / OUT</div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-dot"></div><span class="time-badge">12:00 PM</span><div class="event-title">Check-Out Hotel</div><div class="event-desc">Mañana libre para compras o recorrido personal.</div></div>
+        <div class="event"><div class="event-dot"></div><span class="time-badge">SALIDA</span><div class="event-title">Traslado a EZE Airport</div><div class="event-desc">Traslado privado en bus hacia el Aeropuerto Ezeiza. ¡Fin de servicios!</div></div>
+      </div>
+      <div class="card-footer"><span>Estado:</span><span class="hotel-badge">Fin del Programa</span></div>
+    </div>
+
+  </div>
+
+  <!-- JS para cambiar de día -->
+  <script>
+    function switchDay(dayNumber) {
+      // Oculta todos los días
+      document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
+      // Desmarca todos los botones
+      document.querySelectorAll('.day-btn').forEach(el => el.classList.remove('active'));
+
+      // Muestra el día seleccionado
+      document.getElementById(`day-${dayNumber}`).classList.add('active');
+      // Marca el botón seleccionado
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
